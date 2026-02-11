@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Karen 💘</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+      max-width: 380px;
+      width: 90%;
+      z-index: 1;
+    }
+
+    img {
+      width: 100%;
+      border-radius: 15px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      color: #ff4d6d;
+      margin-bottom: 20px;
+      font-size: 22px;
+    }
+
+    button {
+      font-size: 18px;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 10px;
+      transition: 0.3s ease;
+    }
+
+    #yes {
+      background-color: #ff4d6d;
+      color: white;
+      box-shadow: 0 0 10px #ff4d6d;
+    }
+
+    #yes:hover {
+      box-shadow: 0 0 25px #ff4d6d, 0 0 40px #ff1f5a;
+      transform: scale(1.05);
+    }
+
+    #no {
+      background-color: #ccc;
+      color: black;
+      position: absolute;
+    }
+
+    .drake {
+      position: fixed;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 15px;
+      color: #222;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      font-weight: 500;
+    }
+
+    /* Gallery styles */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 20px;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 12px;
+    }
+
+    /* Falling hearts */
+    .heart {
+      position: fixed;
+      top: -10px;
+      font-size: 24px;
+      animation: fall 4s linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <img src="us.jpeg" alt="Us ❤️">
+
+    <h1>Karen, will you be my Valentine? 💖</h1>
+
+    <button id="yes" onclick="yesClicked()">Yes 💕</button>
+    <button id="no">No 💔</button>
+  </div>
+
+  <div class="drake" id="drakeQuote">
+    🦉 “I only love my bed and my girl… and Karen, you’re my girl.” ❤️‍🔥
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("no");
+    const drakeQuote = document.getElementById("drakeQuote");
+
+    let speedMultiplier = 1;
+    let hoverCount = 0;
+
+    noBtn.addEventListener("mouseover", () => {
+      hoverCount++;
+      speedMultiplier += 0.35;
+
+      const maxX = window.innerWidth - noBtn.offsetWidth;
+      const maxY = window.innerHeight - noBtn.offsetHeight;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      noBtn.style.transition = `all ${0.35 / speedMultiplier}s ease`;
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+
+      if (hoverCount >= 3) {
+        drakeQuote.style.opacity = 1;
+      }
+    });
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 4000);
+    }
+
+    function yesClicked() {
+
+      // Start falling hearts
+      const heartInterval = setInterval(createHeart, 200);
+
+      // Stop hearts after 4 seconds
+      setTimeout(() => {
+        clearInterval(heartInterval);
+      }, 4000);
+
+      document.body.innerHTML = `
+        <div style="
+          min-height:100vh;
+          background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+          font-family:'Segoe UI',sans-serif;
+          text-align:center;
+          padding:30px;
+        ">
+          <h1 style="color:#ff4d6d;">YAY!!! 💘🥰</h1>
+          <p style="font-size:22px;">Guess you’re my Valentine now, Karen ❤️</p>
+          <p style="font-size:16px;">🦉 Certified Lover Boy energy confirmed.</p>
+
+          <div class="gallery">
+            <img src="1.jpeg">
+            <img src="2.jpeg">
+            <img src="3.jpeg">
+            <img src="4.jpeg">
+            <img src="5.jpeg">
+            <img src="6.jpeg">
+            <img src="7.jpeg">
+            <img src="8.jpeg">
+            <img src="9.jpeg">
+          </div>
+        </div>
+      `;
+    }
+  </script>
+
+</body>
+</html>
